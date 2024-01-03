@@ -20,7 +20,7 @@
     visibility: visible;
 }
 
-.card-btn>i{
+.card-btn i{
     color: yellow;
     font-size: 25px;
     height: fit-content;
@@ -32,7 +32,7 @@
 
 
 
-.card-btn>i:hover{
+.card-btn i:hover{
     color: #283747;
     background-color: rgb(217, 217, 217);
 }

@@ -39,3 +39,7 @@ p{
   font-family: poppins;
   font-weight: 400;
 }
+
+a{
+  text-decoration: none;
+}

@@ -12,7 +12,8 @@ function App() {
     found : false,
     pages : 0,
     query : '' ,
-    searched : true
+    searched : true, 
+    total: 0
   })
   
 
@@ -27,7 +28,7 @@ function App() {
         setData(parsedJSON)
         console.log(parsedJSON)
         if(parsedJSON.results){
-          setAttributes({query: search.trim(), found : true, searched:true, pages : parsedJSON.total_pages})
+          setAttributes({query: search.trim(), found : true, searched:true, pages : parsedJSON.total_pages, total: parsedJSON.total})
         }
         else{
           setAttributes({query: search.trim(), found : false, searched:true, pages : -1})
@@ -75,12 +76,12 @@ function App() {
         <div className="images-container">
           {attributes.query && <h1>Images for &quot;{attributes.query}&quot;</h1>}
           {!attributes.searched && <Loading/>}
-          {!attributes.found && attributes.query && <p>No Images found for &quot;{attributes.query}&quot;</p>}
+          {attributes.found && attributes.query && <p>{attributes.total} Images found for &quot;{attributes.query}&quot;</p>}
           {attributes.found && 
               <div className="images">
-                {data.results.map((image) => <Card key={image.id} url={image.urls.regular}/>)}
+                {data.results.map((image) => <Card key={image.id} url={image.urls.regular} imgUrl={image.links.download}/>)}
               </div>}
-            {attributes.found && <div className="page-buttons">
+            { attributes.found && attributes.total != [] && <div className="page-buttons">
               <button className="previous" onClick={goPrevious}><i className="fa-solid fa-chevron-left"></i> Previous</button>
               <button className="next" onClick={goNext}>Next <i className="fa-solid fa-chevron-right"></i></button>
             </div>}

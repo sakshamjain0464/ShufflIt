@@ -5,13 +5,14 @@ export default function Card(props) {
   return (
     <div className="card" style={{ backgroundImage: `url(${props.url})` }}>
         <div className="card-btn">
-            <i className="fa-solid fa-eye"></i>
+            <a href={props.imgUrl} target="_blank" rel="noreferrer"><i className="fa-solid fa-download"></i></a>
         </div>
     </div>
   )
 }
 
 Card.propTypes = {
-    url : PropTypes.string.isRequired
+    url : PropTypes.string.isRequired,
+    imgUrl : PropTypes.string.isRequired
 }
 
