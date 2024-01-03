@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "https://github.com/sakshamjain0464/ShufflIt",
+  base: "https://sakshamjain0464.github.io/ShufflIt/",
   plugins: [react()],
 })

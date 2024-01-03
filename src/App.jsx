@@ -70,7 +70,7 @@ function App() {
         <h1>ShufflIT</h1>
         <h2>Get Your Images</h2>
         <div className="search-container">
-          <input type="text" name="" id=""  onInput={(event) => setSearch(event.target.value)}/>
+          <input type="text" name="" id=""  onInput={(event) => setSearch(event.target.value)} placeholder='Enter Topic to search'/>
           <button onClick={searchImages}><i className="fa-solid fa-magnifying-glass"></i> Search</button>
         </div>
         <div className="images-container">
@@ -86,6 +86,11 @@ function App() {
               <button className="next" onClick={goNext}>Next <i className="fa-solid fa-chevron-right"></i></button>
             </div>}
         </div>
+      </div>
+      <div className="footer">
+        <p>Created By - Saksham Jain</p>
+        <a href="https://github.com/sakshamjain0464/ShufflIt" target='_blank' rel='noreferrer'><i className="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/saksham-jain-15bab2205/" target='_blank' rel='noreferrer'><i className="fa-brands fa-linkedin"></i></a>
       </div>
     </>
   )
