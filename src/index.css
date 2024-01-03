@@ -2,3 +2,40 @@
   margin: 0px;
   padding: 0px;
 }
+
+@font-face {
+  font-family: head;
+  src: url(../Fonts/nexa-rust/head.otf);
+}
+
+@font-face {
+  font-family: poppins;
+  src: url(../Fonts/Poppins/Poppins-Medium.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: poppins;
+  src: url(../Fonts/Poppins/Poppins-Bold.ttf);
+  font-weight: 800;
+}
+
+body{
+  background: #F7F9F9;
+  overflow-x: hidden;
+}
+
+input, button{
+  border: 1px solid black;
+  font-family: poppins;
+  font-weight: 400;
+}
+
+input:focus, button:focus{
+  outline: none;
+}
+
+p{
+  font-family: poppins;
+  font-weight: 400;
+}
