@@ -4,63 +4,63 @@ import Card from '../components/Card/Card.jsx'
 import Loading from '../components/Loading/Loading.jsx'
 
 function App() {
-  let key = import.meta.env.VITE_REACT_APP_API_KEY
-  let [data, setData] = useState({})
-  let [search, setSearch] = useState('')
-  let [page, setPage] = useState(Number(1))
+  let key = import.meta.env.VITE_REACT_APP_API_KEY;
+  let [data, setData] = useState({});
+  let [search, setSearch] = useState('');
   let [attributes, setAttributes] = useState({
     found : false,
     pages : 0,
     query : '' ,
     searched : true, 
-    total: 0
-  })
+    total: 0, 
+    currentPage : 1
+  });
+  let [pageSize, setPageSize] = useState(10);
   
 
-  let searchImages = async () => {
+  let searchImages = async (event, pageNo) => {
     if(search){
-      let curr = attributes.query;
-      (curr!=search)?setPage(1):false
-      setAttributes({query: search.trim(), searched : false})
+      setAttributes({query: search.trim(), searched : false, found : false, pages : 0, currentPage : 0, total : 0});
+      setData({});
       try{
-        let json = await fetch(`https://api.unsplash.com/search/photos?page=${page}&query=${search.trim()}&client_id=${key}&per_page=30`)
-        let parsedJSON = await json.json()
-        setData(parsedJSON)
-        console.log(parsedJSON)
-        if(parsedJSON.results){
-          setAttributes({query: search.trim(), found : true, searched:true, pages : parsedJSON.total_pages, total: parsedJSON.total})
+        let json = await fetch(`https://api.unsplash.com/search/photos?page=${pageNo}&query=${search.trim()}&client_id=${key}&per_page=${pageSize}`);
+        let parsedJSON = await json.json();
+        setData(parsedJSON);
+        if(parsedJSON.total){
+          setAttributes({query: search.trim(), found : true, searched:true, pages : parsedJSON.total_pages, total: parsedJSON.total, currentPage: pageNo});
         }
         else{
-          setAttributes({query: search.trim(), found : false, searched:true, pages : -1})
+          setAttributes({query: search.trim(), found : false, searched:true, pages : 0, currentPage : 0, total : 0});
         }
-        console.log(page)
       }
       catch(error){
-        setAttributes({found : false, searched: true})
-        console.log(error)
+        setAttributes({found : false, searched: true});
+        alert("API Limit Exceeded, Try after some time");
       }
     }
     else {
-      alert("Please Enter Something into the Search Box!")
+      alert("Please Enter Something into the Search Box!");
     } 
 }
 
     let goNext = () =>{
-      let next = page + 1
-      if(page <= attributes.pages){
-        setPage(next)
+      let next = attributes.currentPage + 1;
+      if(next <= attributes.pages){
+        searchImages('', next);
       }
-      searchImages()
-      console.log(page)
+      else{
+        alert("Next Page Not Available");
+      }
     }
 
     let goPrevious = async() =>{
-      let prev = page - 1
-      if(page > 1){
-        setPage(prev)
+      let prev = attributes.currentPage - 1;
+      if(prev >= 1 ){
+        searchImages('', prev);
       }
-      searchImages()
-      console.log(page)
+      else{
+        alert("previous Page Not Available");
+      }
     }
 
 
@@ -71,18 +71,24 @@ function App() {
         <h2>Get Your Images</h2>
         <div className="search-container">
           <input type="text" name="" id=""  onInput={(event) => setSearch(event.target.value)} placeholder='Enter Topic to search'/>
-          <button onClick={searchImages}><i className="fa-solid fa-magnifying-glass"></i> Search</button>
+          <button onClick={() => searchImages('', 1)}><i className="fa-solid fa-magnifying-glass"></i> Search</button>
+        </div>
+        <div className='page-size-container'>
+          <label htmlFor="page-size">Page Size : </label>
+          <input type="range" name="" id="page-size" value={pageSize} min={1} max={30} onChange={(event) => setPageSize(event.target.value)}/>
+          <p>{pageSize}</p>
         </div>
         <div className="images-container">
           {attributes.query && <h1>Images for &quot;{attributes.query}&quot;</h1>}
           {!attributes.searched && <Loading/>}
-          {attributes.found && attributes.query && <p>{attributes.total} Images found for &quot;{attributes.query}&quot;</p>}
+          {attributes.query && <p>{attributes.total} Images found for &quot;{attributes.query}&quot;</p>}
           {attributes.found && 
               <div className="images">
                 {data.results.map((image) => <Card key={image.id} url={image.urls.regular} imgUrl={image.links.download}/>)}
               </div>}
             { attributes.found && attributes.total != [] && <div className="page-buttons">
               <button className="previous" onClick={goPrevious}><i className="fa-solid fa-chevron-left"></i> Previous</button>
+              <p>{attributes.currentPage} of {attributes.pages}</p>
               <button className="next" onClick={goNext}>Next <i className="fa-solid fa-chevron-right"></i></button>
             </div>}
         </div>
