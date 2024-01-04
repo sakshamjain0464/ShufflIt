@@ -1,6 +1,7 @@
 *{
   margin: 0px;
   padding: 0px;
+  user-select: none;
 }
 
 @font-face {
@@ -29,6 +30,7 @@ input, button{
   border: 1px solid black;
   font-family: poppins;
   font-weight: 400;
+  user-select: none;
 }
 
 input:focus, button:focus{
@@ -38,6 +40,7 @@ input:focus, button:focus{
 p{
   font-family: poppins;
   font-weight: 400;
+ 
 }
 
 a{

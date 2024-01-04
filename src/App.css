@@ -42,6 +42,15 @@
   letter-spacing: 1px;
 }
 
+.search-container > input:focus{
+  width: 100%;
+  height: 100%;
+  border: 1px solid #005022;
+  border-radius: 30px;
+  padding: 0px 20px;
+  letter-spacing: 1px;
+}
+
 .search-container > button{
   position: absolute;
   right: 0px;
@@ -53,6 +62,15 @@
   color: white;
   border: none;
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+button:hover{
+  background-color: #02893c;
+}
+
+button:active{
+  background-color: #56b981;
 }
 
 .page-size-container{
@@ -71,7 +89,31 @@ label{
 
 #page-size{
   width: 25%;
+  height: 10px;
+  border-radius: 5px;
+  border: 0.5px solid #005022;
   margin-right: 10px;
+  appearance: none;
+  opacity: 0.7;
+  transition: all 0.2s;
+  outline: none;
+}
+
+#page-size::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px; 
+  height: 20px; 
+  background: #04AA6D; 
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+#page-size:hover{
+  opacity: 1;
+}
+
+.page-size-container > p{
+  width: 10px;
 }
 
 .images-container{
@@ -83,6 +125,11 @@ label{
 }
 
 .images-container > h1{
+  font-family: poppins;
+  font-weight: 400;
+}
+
+.images-container > h2{
   font-family: poppins;
   font-weight: 400;
 }
@@ -130,6 +177,12 @@ label{
 
 .footer > a{
   color: black;
+  font-size: 20px;
+  margin: 0px 8px;
+}
+
+.footer > a:hover{
+  color: gray;
   font-size: 20px;
   margin: 0px 8px;
 }

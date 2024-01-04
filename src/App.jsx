@@ -11,7 +11,7 @@ function App() {
     found : false,
     pages : 0,
     query : '' ,
-    searched : true, 
+    searched : false, 
     total: 0, 
     currentPage : 1
   });
@@ -20,7 +20,7 @@ function App() {
 
   let searchImages = async (event, pageNo) => {
     if(search){
-      setAttributes({query: search.trim(), searched : false, found : false, pages : 0, currentPage : 0, total : 0});
+      setAttributes({query: search.trim(), searched : true, found : false, pages : 0, currentPage : 0, total : 0});
       setData({});
       try{
         let json = await fetch(`https://api.unsplash.com/search/photos?page=${pageNo}&query=${search.trim()}&client_id=${key}&per_page=${pageSize}`);
@@ -75,12 +75,13 @@ function App() {
         </div>
         <div className='page-size-container'>
           <label htmlFor="page-size">Page Size : </label>
-          <input type="range" name="" id="page-size" value={pageSize} min={1} max={30} onChange={(event) => setPageSize(event.target.value)}/>
+          <input type="range" name="" id="page-size" value={pageSize} min={5} max={30} onChange={(event) => setPageSize(event.target.value)}/>
           <p>{pageSize}</p>
         </div>
         <div className="images-container">
+          {!attributes.searched && <h2>Search Something to get images!!</h2>}
           {attributes.query && <h1>Images for &quot;{attributes.query}&quot;</h1>}
-          {!attributes.searched && <Loading/>}
+          {attributes.searched && !attributes.found && <Loading/>}
           {attributes.query && <p>{attributes.total} Images found for &quot;{attributes.query}&quot;</p>}
           {attributes.found && 
               <div className="images">
