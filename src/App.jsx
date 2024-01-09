@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Card from '../components/Card/Card.jsx'
 import Loading from '../components/Loading/Loading.jsx'
@@ -19,7 +19,6 @@ function App() {
   
 
   let searchImages = async (event, pageNo) => {
-    if(search){
       setAttributes({query: search.trim(), searched : true, found : false, pages : 0, currentPage : 0, total : 0});
       setData({});
       try{
@@ -37,11 +36,11 @@ function App() {
         setAttributes({found : false, searched: true});
         alert("API Limit Exceeded, Try after some time");
       }
-    }
-    else {
-      alert("Please Enter Something into the Search Box!");
-    } 
 }
+
+  useEffect(() => {
+    if(search){searchImages('', 1)}
+  }, [search])
 
     let goNext = () =>{
       let next = attributes.currentPage + 1;
@@ -70,8 +69,7 @@ function App() {
         <h1>ShufflIT</h1>
         <h2>Get Your Images</h2>
         <div className="search-container">
-          <input type="text" name="" id=""  onInput={(event) => setSearch(event.target.value)} placeholder='Enter Topic to search'/>
-          <button onClick={() => searchImages('', 1)}><i className="fa-solid fa-magnifying-glass"></i> Search</button>
+          <input type="text" name="" id="" placeholder='Enter Topic to search' onChange={(event) => {setSearch(event.target.value)}}/>
         </div>
         <div className='page-size-container'>
           <label htmlFor="page-size">Page Size : </label>
