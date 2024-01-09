@@ -1,9 +1,9 @@
-import "/components/Loading/loading.css"
+import "/components/Loading/loading.css";
 
 export default function Loading() {
   return (
     <div className="loader-container">
-        <span className="loader"></span>
+      <span className="loader"></span>
     </div>
-  )
+  );
 }

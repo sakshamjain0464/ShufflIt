@@ -1,11 +1,11 @@
-.card{
+.card {
     height: 100%;
     width: 100%;
     background: no-repeat center;
     background-size: cover;
-  }
+}
 
-.card-btn{
+.card-btn {
     height: 100%;
     width: 100%;
     display: flex;
@@ -16,11 +16,11 @@
     visibility: hidden;
 }
 
-.card:hover .card-btn{
+.card:hover .card-btn {
     visibility: visible;
 }
 
-.card-btn i{
+.card-btn i {
     color: yellow;
     font-size: 25px;
     height: fit-content;
@@ -32,7 +32,7 @@
 
 
 
-.card-btn i:hover{
+.card-btn i:hover {
     color: #283747;
     background-color: rgb(217, 217, 217);
 }

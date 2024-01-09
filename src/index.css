@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0px;
   padding: 0px;
   user-select: none;
@@ -21,28 +21,30 @@
   font-weight: 800;
 }
 
-body{
+body {
   background: #F7F9F9;
   overflow-x: hidden;
 }
 
-input, button{
+input,
+button {
   border: 1px solid black;
   font-family: poppins;
   font-weight: 400;
   user-select: none;
 }
 
-input:focus, button:focus{
+input:focus,
+button:focus {
   outline: none;
 }
 
-p{
+p {
   font-family: poppins;
   font-weight: 400;
- 
+
 }
 
-a{
+a {
   text-decoration: none;
 }

@@ -9,7 +9,7 @@
     animation: rotation 1s linear infinite;
 }
 
-.loader-container{
+.loader-container {
     width: 100%;
     display: flex;
     justify-content: center;
